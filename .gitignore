@@ -1,3 +1,6 @@
+# Garbage
+build*
+
 # Prerequisites
 *.d
 
