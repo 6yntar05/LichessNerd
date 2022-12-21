@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.11)
 set     (PROJECT_NAME LichessNerd)
 project (${PROJECT_NAME}
     DESCRIPTION     "lichess.org cli/tui client "
@@ -9,14 +9,33 @@ project (${PROJECT_NAME}
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+### Options ###
 option(BUILD_SAN "Build project with sanitizers (Debug only!)" OFF)
 
-include(./cmake/submodules.cmake)
-submodulesUpdate()
+### Modules ###
+include          (${PROJECT_SOURCE_DIR}/cmake/submodules.cmake)
+submodulesUpdate ()
+    #FTXUI
+set (FTXUI_DIR ${PROJECT_SOURCE_DIR}/modules/FTXUI)
+add_subdirectory    (${FTXUI_DIR})
 
+### Target ####
 include(./cmake/compileOptions.cmake)
 setOpts()
 
-file                (GLOB_RECURSE SRCFILES "./src/*.cxx")
+file                (GLOB_RECURSE SRCFILES "${PROJECT_SOURCE_DIR}/src/*.cxx")
 add_executable      (${PROJECT_NAME} ${SRCFILES})
-include_directories (AFTER SYSTEM ./include)
+include_directories (AFTER SYSTEM ${PROJECT_SOURCE_DIR}/include)
+
+#### Libs #####
+    #FTXUI
+find_library            (ftxui HINTS ${FTXUI_DIR}/include)
+include_directories     (${FTXUI_DIR}/include)
+target_link_libraries   (${PROJECT_NAME}
+    PRIVATE ftxui::screen
+    PRIVATE ftxui::dom
+    PRIVATE ftxui::component
+)
+
+### Install ###
+install(TARGETS ${PROJECT_NAME} DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
