@@ -1,6 +1,7 @@
 # Garbage
 build*
 .cache
+token.txt
 
 # CMake
 CMakeLists.txt.user
