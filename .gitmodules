@@ -1,3 +1,6 @@
 [submodule "modules/FTXUI"]
 	path = modules/FTXUI
 	url = https://github.com/ArthurSonzogni/FTXUI
+[submodule "modules/cpr"]
+	path = modules/cpr
+	url = https://github.com/libcpr/cpr

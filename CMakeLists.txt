@@ -17,7 +17,10 @@ include          (${PROJECT_SOURCE_DIR}/cmake/submodules.cmake)
 submodulesUpdate ()
     #FTXUI
 set (FTXUI_DIR ${PROJECT_SOURCE_DIR}/modules/FTXUI)
-add_subdirectory    (${FTXUI_DIR})
+add_subdirectory (${FTXUI_DIR})
+    #CPR
+set (CPR_DIR ${PROJECT_SOURCE_DIR}/modules/cpr)
+add_subdirectory (${CPR_DIR})
 
 ### Target ####
 include(./cmake/compileOptions.cmake)
@@ -35,6 +38,12 @@ target_link_libraries   (${PROJECT_NAME}
     PRIVATE ftxui::screen
     PRIVATE ftxui::dom
     PRIVATE ftxui::component
+)
+    #CPR
+find_library            (cpr HINTS ${CPR_DIR}/include)
+include_directories     (${CPR_DIR}/include)
+target_link_libraries   (${PROJECT_NAME}
+    PRIVATE cpr::cpr
 )
 
 ### Install ###
