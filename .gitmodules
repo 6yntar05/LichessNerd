@@ -4,3 +4,6 @@
 [submodule "modules/cpr"]
 	path = modules/cpr
 	url = https://github.com/libcpr/cpr
+[submodule "modules/simdjson"]
+	path = modules/simdjson
+	url = https://github.com/simdjson/simdjson

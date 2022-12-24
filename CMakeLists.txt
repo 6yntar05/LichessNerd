@@ -15,12 +15,15 @@ option(BUILD_SAN "Build project with sanitizers (Debug only!)" OFF)
 ### Modules ###
 include          (${PROJECT_SOURCE_DIR}/cmake/submodules.cmake)
 submodulesUpdate ()
-    #FTXUI
+    # FTXUI
 set (FTXUI_DIR ${PROJECT_SOURCE_DIR}/modules/FTXUI)
 add_subdirectory (${FTXUI_DIR})
-    #CPR
+    # cpr
 set (CPR_DIR ${PROJECT_SOURCE_DIR}/modules/cpr)
 add_subdirectory (${CPR_DIR})
+    # simdjson
+set (SIMDJSON_DIR ${PROJECT_SOURCE_DIR}/modules/simdjson)
+add_subdirectory (${SIMDJSON_DIR})
 
 ### Target ####
 include(./cmake/compileOptions.cmake)
@@ -31,7 +34,7 @@ add_executable      (${PROJECT_NAME} ${SRCFILES})
 include_directories (AFTER SYSTEM ${PROJECT_SOURCE_DIR}/include)
 
 #### Libs #####
-    #FTXUI
+    # FTXUI
 find_library            (ftxui HINTS ${FTXUI_DIR}/include)
 include_directories     (${FTXUI_DIR}/include)
 target_link_libraries   (${PROJECT_NAME}
@@ -39,11 +42,17 @@ target_link_libraries   (${PROJECT_NAME}
     PRIVATE ftxui::dom
     PRIVATE ftxui::component
 )
-    #CPR
+    # cpr
 find_library            (cpr HINTS ${CPR_DIR}/include)
 include_directories     (${CPR_DIR}/include)
 target_link_libraries   (${PROJECT_NAME}
     PRIVATE cpr::cpr
+)
+    # simdjson
+find_library            (simdjson HINTS ${CPR_DIR}/include)
+include_directories     (${CPR_DIR}/include)
+target_link_libraries   (${PROJECT_NAME}
+    PRIVATE simdjson::simdjson
 )
 
 ### Install ###

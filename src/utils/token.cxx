@@ -6,10 +6,10 @@
 
 namespace utils {
 
-std::string readToken() {
+std::string readToken(const std::string path) {
     std::string token;
 
-    std::ifstream tokenFile("./token.txt");
+    std::ifstream tokenFile(path);
     if (!tokenFile.is_open())
         ui::error("Unable to read the token!");
     tokenFile >> token;

@@ -2,6 +2,6 @@
 
 namespace utils {
 
-std::string readToken();
+std::string readToken(const std::string path);
 
 } // namespace utils

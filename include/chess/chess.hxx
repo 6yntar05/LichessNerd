@@ -1,5 +1,7 @@
+#include <string>
+
 namespace chess {
     
-    void demo();
+    void demo(const std::string token);
 
 } // namespace chess
