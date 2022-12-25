@@ -1,5 +1,4 @@
 #include "utils/token.hxx"
-#include "ui/feedback.hxx"
 
 #include <iostream>
 #include <fstream>
@@ -11,7 +10,7 @@ std::string readToken(const std::string path) {
 
     std::ifstream tokenFile(path);
     if (!tokenFile.is_open())
-        ui::error("Unable to read the token!");
+        std::cerr << "Unable to read the token!\n"; // Later...
     tokenFile >> token;
     tokenFile.close();
 

@@ -1,6 +1,7 @@
 #include "chess/chess.hxx"
 #include "utils/token.hxx"
 #include "ui/ui.hxx"
+
 #include <iostream>
 
 int main(int argc, char** argv) {
@@ -18,5 +19,6 @@ int main(int argc, char** argv) {
     //gameStream.setCallBack(board.asyncCallBack);
 
     //gameStream.terminate();
+    ui::demo();
     return 0;
 }
